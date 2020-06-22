@@ -1,8 +1,8 @@
 %TDA Zona
 % [Nombre Repo, Autor, [Work Space, Index, Local Repository, Remote
 % Repository]]
-% [String, String, TDA Objeto, TDA Objeto, TDA Objeto, TDA
-% Objeto]
+% [String, String, [TDA Objeto, TDA Objeto, TDA Objeto, TDA
+% Objeto]]
 %
 %
 %TDA Objeto
@@ -138,10 +138,10 @@ get_Lista_Archivos(Objeto, ELEM):-
 
 %Setters TDA Objeto
 set_Commit(Objeto, Commit, ELEM):-
-    nth0(Objeto, Commit, ELEM).
+    replace(Objeto, 0,Commit, ELEM).
 
 set_Lista_Archivos(Objeto, ListaArchivos, ELEM):-
-    nth0(Objeto, ListaArchivos, ELEM).
+    replace(Objeto, 1, ListaArchivos, ELEM).
 
 %##############################################################
 
@@ -210,75 +210,82 @@ replace(L, _, _, L).
 gitInit(NombreRepo, Autor, RepoOutput):-
     RepoOutput = [NombreRepo, Autor, [[], [], [], []] ].
 
+
+% gitInit("Lab", "Pedro", OUT).
+% gitInit("Marco teorico", "Nadie", OUT).
+% gitInit("31 Minutos", "Tulio Triviño", OUT).
 %##############################################################
 
 
 %##############################################################
 % Funcion que pasa el contenido de Work Space a Index
 gitAdd(RepoInput, _, RepoOutput):- %Archivos
-    write("input: "),
-    write(RepoInput),
-    nl,
     get_Work_Space(RepoInput, WS),
-    write("ws: "),
-    write(WS),
-    nl,
     set_Work_Space(RepoInput, [], RepoOutputAux),
-    write("output: "),
-    write(RepoOutputAux),
-    nl,
     get_Index(RepoInput, I),
-    write("index: "),
-    write(I),
-    nl,
     (I = []; WS = []),
-    write("Uno vacio"),
-    nl,
     append(I, WS, NEWINDEX),
-    write("newindex: "),
-    write(NEWINDEX),
-    nl,
-    set_Index(RepoOutputAux, NEWINDEX, RepoOutput),
-    write("output final: "),
-    write(RepoOutput),
-    nl.
+    set_Index(RepoOutputAux, NEWINDEX, RepoOutput).
 
 gitAdd(RepoInput, _, RepoOutput):- %Archivos
-    write("input: "),
-    write(RepoInput),
-    nl,
     get_Work_Space(RepoInput, WS),
-    write("ws: "),
-    write(WS),
-    nl,
     set_Work_Space(RepoInput, [], RepoOutputAux),
-    write("output: "),
-    write(RepoOutputAux),
-    nl,
     get_Index(RepoInput, I),
-    write("index: "),
-    write(I),
-    nl,
     I \= [],
     WS \= [],
-    write("ninguno vacio"),
-    nl,
     NEWINDEX = [I, WS],
-    write("newindex: "),
-    write(NEWINDEX),
-    nl,
-    set_Index(RepoOutputAux, NEWINDEX, RepoOutput),
-    write("output final: "),
-    write(RepoOutput),
-    nl.
+    set_Index(RepoOutputAux, NEWINDEX, RepoOutput).
 
+
+% gitAdd(["V", "B", [["Commit", [["Español.txt"], ["print(Hola
+% Mundo)"]]], [], [], []]], _ , OUT).
+
+% gitAdd(["Test", "Franco", [["Commit", [["Alemán.txt"], ["print(Hallo
+% Welt)"]]], [], [], []]], _ , OUT).
+
+% gitAdd(["Idiomas", "Teacher", [["Commit", [["Ingles.txt"],
+% ["print(Hello World)"]]], [], [], []]], _ , OUT).
+
+% ##############################################################
 
 %##############################################################
+% Funcion que agrega el Mensaje (Commit) al contenido de index y lo
+% traspasa a Local Repository
+gitCommit(RepoInput, Mensaje, RepoOutput):-
+    get_Index(RepoInput, I),
+    set_Commit(I, Mensaje, NEWINDEX),
+    set_Index(RepoInput, [], RepoOutputAux),
+    set_Local_Repository(RepoOutputAux, NEWINDEX, RepoOutput).
+
+% gitCommit(["V","B",[[],["Commit",[["Español.txt"],["print(Hola
+% Mundo)"]]],[],[]]], "Se agrego Español.txt", OUT).
+
+% gitCommit(["Hola","Juan",[[],[" ",[["Alemán.txt"],["print(Hallo
+% Welt)"]]],[],[]]], "Se agrego Alemán.txt", OUT).
+
+% gitCommit(["Ingles","Profe",[[],["vacio",[["Ingles.txt"],["print(Hello
+% world)"]]],[],[]]], "Se agrego Ingles.txt", OUT).
+
+% ##############################################################
 
 
-%gitCommit(RepoInput, Mensaje, RepoOutput).
+% ##############################################################
+% Funcion que mueve el Local Repository a Remote Repository
+gitPush(RepoInput, RepoOutput):-
+    get_Local_Repository(RepoInput, LR),
+    set_Local_Repository(RepoInput, [], RepoOutputAux),
+    set_Remote_Repository(RepoOutputAux, LR, RepoOutput).
 
-%gitPush(RepoInput, RepoOutput).
+% gitPush(["V","B",[[],[],["Se agrego Español.txt",[["Español.txt"],["print(Hola Mundo)"]]],[]]], OUT).
+
+% gitPush(["Tesis","Yo nunca",[[],[],["Pongame 7 porfavor.txt",[["Tesis.txt"],["print(La respuesta es D de
+% Diosito)"]]],[]]], OUT).
+
+% gitPush(["Alemán","Professor",[[],[],["Vocabulario basico",[["Vocab.txt"],["Ich bin Professor, und du?"]]],[]]], OUT).
+%
+% ##############################################################
+
+
 
 %git2String(RepoInput, RepoAsString).
 
