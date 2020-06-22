@@ -1,0 +1,15 @@
+%TDA Archivo
+%[Nombre, Contenido]
+%[String, String]
+%
+%
+%TDA Zona
+%[Work Space, Index, Local Repository, Remote Repository]
+%[TDA Objeto, TDA Objeto, TDA Objeto, TDA Objeto]
+%
+%
+%TDA Objeto
+%[Commit, Lista de Archivos]
+%[String, Lista de TDA Archivo]
+
+tiempo(Y):- get_time(X), convert_time(X,Y).
