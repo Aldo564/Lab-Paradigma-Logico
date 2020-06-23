@@ -113,22 +113,22 @@ set_Fecha(Zona, Fecha, ELEM):-
 set_Work_Space(Zona, WorkSpace, ELEM):-
     get_Zonas(Zona, Zonas),
     replace(Zonas, 0, WorkSpace, NEWZONE),
-    replace(Zona, 2, NEWZONE, ELEM).
+    replace(Zona, 3, NEWZONE, ELEM).
 
 set_Index(Zona, Index, ELEM):-
     get_Zonas(Zona, Zonas),
     replace(Zonas, 1, Index, NEWZONE),
-    replace(Zona, 2, NEWZONE, ELEM).
+    replace(Zona, 3, NEWZONE, ELEM).
 
 set_Local_Repository(Zona, LocalRepository, ELEM):-
     get_Zonas(Zona, Zonas),
     replace(Zonas, 2, LocalRepository, NEWZONE),
-    replace(Zona, 2, NEWZONE, ELEM).
+    replace(Zona, 3, NEWZONE, ELEM).
 
 set_Remote_Repository(Zona, RemoteRepository, ELEM):-
     get_Zonas(Zona, Zonas),
     replace(Zonas, 3, RemoteRepository, NEWZONE),
-    replace(Zona, 2, NEWZONE, ELEM).
+    replace(Zona, 3, NEWZONE, ELEM).
 
 %##############################################################
 
@@ -465,35 +465,22 @@ git2String(RepoInput, RepoAsString):-
 
 
 %git2String(["V","B", "Tue Jun 23 14:47:31 2020.",[["Commit ws",[["a.txt","contenido"]]],["Commit I",[["b.txt","contenido"]]],["Commit Local",[["c.txt","contenido"]]],["Commit Remote",[["d.txt","contenido"]]]]],OUT).
-
-%git2String(["V","B", "Tue Jun 23 14:47:31 2020.",[[],[],["Commit Local",[["c.txt","contenido"]]],["Commit Remote",[["d.txt","contenido"]]]]],OUT).
+%
+%git2String(["Lab","Juan", "Mon Jun 23 14:47:31 2020.",[["No Commit",[["WorkSpace.txt","contenido"]]],["No Commit",[["Index.txt","contenido"]]],["Commit Local",[["LocalRepo.txt","contenido"]]],["Commit Remote",[["RemoteRepo.txt","contenido"]]]]],OUT).
 
 %git2String(["V","B", "Tue Jun 23 14:47:31 2020.",[["Commit ws",[["a.txt","contenido"]]],["Commit I",[["b.txt","contenido"]]],[],[]]],OUT).
 
 % ##############################################################
 
+% ##############################################################
+% Funcion que mueve el contenido de Remote Repository a Local Repository
+% ademas coloca los archivos correspondientes en el Work Space
+gitPull(RepoInput, RepoOutput):-
+    get_Remote_Repository(RepoInput, RR),
+    set_Local_Repository(RepoInput, RR, RepoOutputAux),
+    set_Work_Space(RepoOutputAux, RR, RepoOutpurAux2),
+    set_Remote_Repository(RepoOutpurAux2, [], RepoOutput).
 
 
 
-% ###### Repositorio 'lab3' ######
-% Fecha de creación: 2020/05/20 15:40:10
-% Autor: Juanito Perez
-% rama actual: master
-% Archivos en workspace:
-%     a1.txt
-%     asd.dat
-%     blablabla.jpg
-% Archivos en Index:
-
-% Commits en local repository:
-%    [12AB1EFF] 'mensaje de ejemplo del primer commit'
-%        a1.txt
-%    [AAA8B1CCF] 'otro mensaje para segundo commit, se agrega archivo
-%    asd.dat y blablabla.jpg'
-%        asd.dat
-%        blablabla.jpg
-% Commits en remote repository:
-%    [12AB1EFF] 'mensaje de ejemplo del primer commit'
-%        a1.txt
-% ##### FIN DE REPRESENTACIÓN COMO STRING DEL REPOSITORIO #####
-
+% ##############################################################
