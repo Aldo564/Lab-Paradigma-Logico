@@ -9,7 +9,7 @@
 % [String, Lista de TDA Archivo]
 %
 %
-% TDA Archivo
+%TDA Archivo
 % [Nombre, Contenido]
 % [String, String]
 
@@ -465,7 +465,7 @@ git2String(RepoInput, RepoAsString):-
 
 
 %git2String(["V","B", "Tue Jun 23 14:47:31 2020.",[["Commit ws",[["a.txt","contenido"]]],["Commit I",[["b.txt","contenido"]]],["Commit Local",[["c.txt","contenido"]]],["Commit Remote",[["d.txt","contenido"]]]]],OUT).
-%
+
 %git2String(["Lab","Juan", "Mon Jun 23 14:47:31 2020.",[["No Commit",[["WorkSpace.txt","contenido"]]],["No Commit",[["Index.txt","contenido"]]],["Commit Local",[["LocalRepo.txt","contenido"]]],["Commit Remote",[["RemoteRepo.txt","contenido"]]]]],OUT).
 
 %git2String(["V","B", "Tue Jun 23 14:47:31 2020.",[["Commit ws",[["a.txt","contenido"]]],["Commit I",[["b.txt","contenido"]]],[],[]]],OUT).

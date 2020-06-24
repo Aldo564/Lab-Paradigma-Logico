@@ -9,7 +9,7 @@
 % [String, Lista de TDA Archivo]
 %
 %
-% TDA Archivo
+%TDA Archivo
 % [Nombre, Contenido]
 % [String, String]
 
@@ -481,6 +481,10 @@ gitPull(RepoInput, RepoOutput):-
     set_Work_Space(RepoOutputAux, RR, RepoOutpurAux2),
     set_Remote_Repository(RepoOutpurAux2, [], RepoOutput).
 
+% gitPull(["V","B", "Tue Jun 23 14:47:31 2020.",[[],[],[],["Commit Remote",[["d.txt","contenido"]]]]], OUT).
 
+% gitPull(["V","B", "Tue Jun 23 14:47:31 2020.",[[],[],[],[]]], OUT).
+
+% gitPull(["V","B", "Wed Jun 23 14:47:31 2020.",[[],[],[],["Se movera a ws y local",[["archivo.txt","contenido"]]]]], OUT).
 
 % ##############################################################
