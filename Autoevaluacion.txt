@@ -1,0 +1,47 @@
+Requerimientos No Funcionales obligatorios
+
+Incluir autoevaluación de cada uno de los requerimientos funcionales (obligatorios y extras) solicitados.
+1
+
+La implementación debe ser en el lenguaje de programación Prolog.
+1
+
+Usar Swi-Prolog versión 8.x.x.
+1
+
+Se debe documentar el código indicando una breve descripción del programa, reglas, 
+hechos, parámetros de entrada y salida, consultas, etc.
+1
+
+Organización del código (orden y claridad).
+1
+
+Todos los predicados deben estar debidamente comentados. Indicando descripción de la relación, términos de entrada y de salida.
+0.75
+
+Historial en Github
+0.5
+
+Al final de su código incluir al menos 3 ejemplos de uso para cada  una de las funciones correspondientes a requerimientos funcionales obligatorios y los extra. Solo se revisarán aquellas funciones para las que existan los ejemplos provistos.
+1
+
+
+Requerimientos Funcionales Obligatorios 
+
+Implementacion de TDAs
+1
+
+gitInit
+1
+
+GitAdd
+1
+
+GitCommit
+1
+
+GitPush
+1
+
+Git2String
+1
